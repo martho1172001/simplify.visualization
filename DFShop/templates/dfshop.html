@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demand Forecasting</title>
+</head>
+
+<body>
+    <h1>Demand Forecasting</h1>
+    <form method="post" action="/outDFS" target="_blank">
+        {% csrf_token %}
+        <label for="selected_product">Select a product:</label>
+        <select name="selected_product" id="selected_product">
+			{% for product in products %}
+				<option value="{{ product }}">{{ product }}</option>
+			{% endfor %}
+		</select>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
