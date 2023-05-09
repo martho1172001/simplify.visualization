@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>simplyfy.Visualization</title>
+</head>
+
+<body>
+
+    <div style="display:flex;">
+        {% if plot_data %}
+
+        <div>
+            <h2> Visualizing overall sales of latest month :</h2>
+            <div id="graph-container" style="width: 600px; height: 400px;">
+                <img style="max-width: 100%; height: auto; " src="data:image/png;base64,{{ plot_data }}" alt="Forecast Plot">
+            </div>
+        </div>
+        {% endif %}
+        <div style="padding-left:100px;">
+
+
+            <br></br>
+            <br></br>
+            <h2> Move on to shop level permissions :</h2>
+            <form method="post" action="/outvmoshop" target="_self">
+                {% csrf_token %}
+                <label for="selected_shop">Select a shop_id:</label>
+                <select name="selected_shop" id="selected_shop">
+			{% for shop in shop_ids %}
+				<option value="{{ shop }}">{{ shop }}</option>
+			{% endfor %}
+		</select>
+                <br></br>
+                <input type="submit" value="Submit">
+            </form>
+
+
+
+
+            <br></br>
+            <br></br>
+
+            <h2> Move on to product level permissions :</h2>
+            <form method="post" action="/outvmoprod" target="_self">
+                {% csrf_token %}
+                <label for="selected_product">Select a product:</label>
+                <select name="selected_product" id="selected_product">
+			{% for product in products %}
+				<option value="{{ product }}">{{ product }}</option>
+			{% endfor %}
+		    </select>
+                <br></br>
+                <input type="submit" value="Submit">
+            </form>
+            <br></br>
+            <br></br>
+            <h2> Visualize past sales of a product in a shop :</h2>
+            <form method="post" action="/outvmo" target="_self">
+                {% csrf_token %}
+                <label for="selected_shop">Select a shop id:</label>
+                <select name="selected_shop" id="selected_shop">
+			{% for id in shop_ids %}
+				<option value="{{ id }}">{{ id }}</option>
+			{% endfor %}
+		</select>
+                <br><br> {% csrf_token %}
+                <label for="selected_product">Select a product:</label>
+                <select name="selected_product" id="selected_product">
+			{% for product in products %}
+				<option value="{{ product }}">{{ product }}</option>
+			{% endfor %}
+		</select>
+                <br><br>
+                <label for="startdate">Select a start date:</label>
+                <input type="date" id="startdate" name="startdate">
+
+                <br></br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

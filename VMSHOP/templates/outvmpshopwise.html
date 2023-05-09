@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>simplyfy.Visualization</title>
+</head>
+
+<body>
+    <div style="display:flex;">
+        <div>
+            <h2> Visualizing sales of product {{selected_product}} across shops</h2>
+            <div id="graph-container" style="width: 600px; height: 400px;">
+                <img style="max-width: 100%; height: auto; " src="data:image/png;base64,{{ plot_data }}" alt="Forecast Plot">
+            </div>
+        </div>
+
+</body>
+
+</html>

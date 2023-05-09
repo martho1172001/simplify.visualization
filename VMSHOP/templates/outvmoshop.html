@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>simplyfy.Visualization.shop{{selected_shop}}</title>
+</head>
+
+<body>
+
+    <div style="display:flex;">
+        {% if plot_data %}
+
+        <div>
+            <h2> Visualizing overall sales of latest month :</h2>
+            <div id="graph-container" style="width: 600px; height: 400px;">
+                <img style="max-width: 100%; height: auto; " src="data:image/png;base64,{{ plot_data }}" alt="Forecast Plot">
+            </div>
+        </div>
+
+        {% endif %}
+        <div style="justify-items: center;padding-top: 100px;padding-left: 150px;">
+            <h2> Compare with the overall sales of another month :</h2>
+            <form method="post" action="{% url 'outvmovmscompare' selected_shop=selected_shop %}" target="_self">
+                {% csrf_token %}
+
+                <label for="comparedate">Select a date (Eg: May 1971 as 01-05-1971) : </label>
+                <input type="date" id="comparedate" name="comparedate">
+                <br><br>
+
+                <input type="submit" value="Submit">
+            </form>
+            <br></br>
+            <br></br>
+            <h2> Visualize past sales of a product in this shop :</h2>
+            <form method="post" action="{% url 'outvmovms'  selected_shop=selected_shop %}" target="_self">
+                {% csrf_token %}
+                <label for="selected_product">Select a product:</label>
+                <select name="selected_product" id="selected_product">
+			{% for product in products %}
+				<option value="{{ product }}">{{ product }}</option>
+			{% endfor %}
+		     </select>
+                <br><br>
+                <label for="startdate">Select a start date:</label>
+                <input type="date" id="startdate" name="startdate">
+                <br><br>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
